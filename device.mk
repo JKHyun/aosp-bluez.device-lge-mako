@@ -45,6 +45,9 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_KERNEL):kernel
 
 PRODUCT_COPY_FILES += \
+	$(foreach module, $(wildcard device/lge/mako-kernel/modules/*.ko), $(module):system/lib/modules/$(notdir $(module)))
+
+PRODUCT_COPY_FILES += \
 	device/lge/mako/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
 	device/lge/mako/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
 	device/lge/mako/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin
