@@ -55,6 +55,9 @@ PRODUCT_COPY_FILES := \
 	$(LOCAL_KERNEL):kernel
 
 PRODUCT_COPY_FILES += \
+	$(foreach module, $(wildcard device/lge/mako-kernel/modules/*.ko), $(module):system/lib/modules/$(notdir $(module)))
+
+PRODUCT_COPY_FILES += \
 	device/lge/mako/WCNSS_cfg.dat:system/vendor/firmware/wlan/prima/WCNSS_cfg.dat \
 	device/lge/mako/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
 	device/lge/mako/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin
@@ -277,6 +280,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	persist.sys.bluetooth.handsfree=hfp_wbs
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 $(call inherit-product, hardware/qcom/msm8960/msm8960.mk)
